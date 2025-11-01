@@ -1,0 +1,23 @@
+{
+  "projectId": "proj-001",
+  "progress": {
+    "phase": "Coding",
+    "status": "Running tests for 'Product Catalog' module...",
+    "passRate": 0.85,
+    "coverage": 0.75
+  },
+  "testCases": [
+    {
+      "id": "tc-01",
+      "feature": "User Authentication",
+      "scenario": "User signs up with a valid email",
+      "status": "passed"
+    },
+    {
+      "id": "tc-02",
+      "feature": "User Authentication",
+      "scenario": "User tries to sign up with an existing email",
+      "status": "passed"
+    }
+  ]
+}
