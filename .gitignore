@@ -15,3 +15,17 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+npm-debug.log
+yarn-error.log
+
+# Python
+__pycache__/
+*.pyc
+.env
+.venv
+venv/
+env/

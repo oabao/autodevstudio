@@ -1,0 +1,16 @@
+[
+  {
+    "id": "proj-001",
+    "name": "E-commerce Platform",
+    "description": "A modern e-commerce platform with a focus on user experience.",
+    "status": "Development",
+    "current_phase": "Coding"
+  },
+  {
+    "id": "proj-002",
+    "name": "Social Media Analytics Dashboard",
+    "description": "A dashboard for analyzing social media trends.",
+    "status": "Requirement Analysis",
+    "current_phase": "Requirement Analysis"
+  }
+]

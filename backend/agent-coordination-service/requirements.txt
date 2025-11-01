@@ -1,0 +1,6 @@
+# backend/agent-coordination-service/requirements.txt
+fastapi
+uvicorn
+openai
+pinecone-client
+python-dotenv

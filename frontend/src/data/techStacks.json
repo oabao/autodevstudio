@@ -1,0 +1,19 @@
+{
+  "projectId": "proj-001",
+  "recommendedStacks": [
+    {
+      "id": "stack-01",
+      "name": "React + Spring Boot",
+      "description": "A robust and scalable stack, ideal for e-commerce.",
+      "pros": ["Strongly typed", "Large ecosystem", "Good performance"],
+      "cons": ["Can be complex to set up"]
+    },
+    {
+      "id": "stack-02",
+      "name": "Vue.js + Node.js (Express)",
+      "description": "A lightweight and fast stack, great for rapid development.",
+      "pros": ["Easy to learn", "Fast development cycle"],
+      "cons": ["Less structured than Spring Boot"]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "projectId": "proj-001",
+  "diagrams": [
+    {
+      "id": "diag-01",
+      "title": "System Context Diagram",
+      "type": "C4",
+      "url": "https://via.placeholder.com/800x450.png?text=System+Context+Diagram"
+    },
+    {
+      "id": "diag-02",
+      "title": "Database Schema",
+      "type": "ERD",
+      "url": "https://via.placeholder.com/800x450.png?text=Database+Schema"
+    }
+  ],
+  "prototypeUrl": "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2F12345%2FAutoDevStudio-Prototype"
+}
