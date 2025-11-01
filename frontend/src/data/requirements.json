@@ -1,0 +1,41 @@
+{
+  "features": [
+    {
+      "id": "feat-1",
+      "name": "User Authentication",
+      "description": "Users can sign up, log in, and log out.",
+      "priority": "high",
+      "userStories": [
+        { "id": "us-1", "story": "As a user, I want to create an account so I can access the platform." },
+        { "id": "us-2", "story": "As a user, I want to log in to my account securely." }
+      ]
+    },
+    {
+      "id": "feat-2",
+      "name": "Project Dashboard",
+      "description": "Users can view a list of their projects.",
+      "priority": "high",
+      "userStories": [
+        { "id": "us-3", "story": "As a user, I want to see all my projects in one place." }
+      ]
+    },
+    {
+      "id": "feat-3",
+      "name": "Billing Management",
+      "description": "Users can view their subscription and payment history.",
+      "priority": "medium",
+      "userStories": [
+        { "id": "us-4", "story": "As a user, I want to check my current billing plan." }
+      ]
+    },
+    {
+      "id": "feat-4",
+      "name": "Profile Settings",
+      "description": "Users can update their personal information.",
+      "priority": "low",
+      "userStories": [
+        { "id": "us-5", "story": "As a user, I want to change my password." }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "invoices": [
+    {
+      "key": "1",
+      "invoiceId": "INV-202401",
+      "date": "2024-07-01",
+      "amount": 99.99,
+      "status": "Paid"
+    },
+    {
+      "key": "2",
+      "invoiceId": "INV-202402",
+      "date": "2024-08-01",
+      "amount": 99.99,
+      "status": "Paid"
+    },
+    {
+      "key": "3",
+      "invoiceId": "INV-202403",
+      "date": "2024-09-01",
+      "amount": 199.99,
+      "status": "Pending"
+    }
+  ],
+  "usageData": [
+    { "month": "June", "type": "Tokens", "value": 500000 },
+    { "month": "June", "type": "Build Minutes", "value": 300 },
+    { "month": "July", "type": "Tokens", "value": 750000 },
+    { "month": "July", "type": "Build Minutes", "value": 450 },
+    { "month": "August", "type": "Tokens", "value": 1200000 },
+    { "month": "August", "type": "Build Minutes", "value": 600 }
+  ]
+}

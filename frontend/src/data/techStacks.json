@@ -1,0 +1,25 @@
+{
+  "recommendations": [
+    {
+      "id": "stack-1",
+      "name": "React + Spring Boot",
+      "description": "A robust and scalable stack, ideal for complex web applications.",
+      "pros": ["Strong typing with TypeScript", "Large ecosystem for both frontend and backend", "High performance"],
+      "cons": ["Can be complex to set up", "Java backend might have a steeper learning curve"]
+    },
+    {
+      "id": "stack-2",
+      "name": "Vue + Python (FastAPI)",
+      "description": "A modern and fast stack, great for API-driven applications and machine learning integrations.",
+      "pros": ["Excellent performance with FastAPI", "Easy to learn Vue.js", "Great for AI/ML projects"],
+      "cons": ["Smaller ecosystem compared to React/Spring", "Vue's reactivity system can be tricky"]
+    },
+    {
+      "id": "stack-3",
+      "name": "Angular + .NET",
+      "description": "A comprehensive and enterprise-ready stack from Microsoft.",
+      "pros": ["Fully-featured framework with Angular", "Strongly-typed and secure with .NET", "Excellent tooling"],
+      "cons": ["Can be opinionated and rigid", "Steeper learning curve for both"]
+    }
+  ]
+}
