@@ -1,49 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Table } from 'antd';
-import { Line } from '@ant-design/plots';
-
-const usageData = [
-  { month: 'January', usage: 1200 },
-  { month: 'February', usage: 1500 },
-  { month: 'March', usage: 1300 },
-  { month: 'April', usage: 1800 },
-  { month: 'May', usage: 2200 },
-];
-
-const billingHistory = [
-  { id: '1', date: '2023-05-01', amount: '$29.99', status: 'Paid' },
-  { id: '2', date: '2023-04-01', amount: '$29.99', status: 'Paid' },
-  { id: '3', date: '2023-03-01', amount: '$29.99', status: 'Paid' },
-];
-
-const columns = [
-  { title: 'Invoice ID', dataIndex: 'id', key: 'id' },
-  { title: 'Date', dataIndex: 'date', key: 'date' },
-  { title: 'Amount', dataIndex: 'amount', key: 'amount' },
-  { title: 'Status', dataIndex: 'status', key: 'status' },
-];
+import { getUsage } from '../../services/api/billingService';
 
 const UsageMonitor: React.FC = () => {
-  const config = {
-    data: usageData,
-    xField: 'month',
-    yField: 'usage',
-    point: {
-      size: 5,
-      shape: 'diamond',
-    },
-  };
+    const [usage, setUsage] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-  return (
-    <div>
-      <Card title="Token Usage This Year">
-        <Line {...config} />
-      </Card>
-      <Card title="Billing History" style={{ marginTop: 24 }}>
-        <Table dataSource={billingHistory} columns={columns} pagination={false} />
-      </Card>
-    </div>
-  );
+    useEffect(() => {
+        const fetchUsage = async () => {
+            try {
+                const response = await getUsage();
+                setUsage(response.data);
+            } catch (error) {
+                console.error('Failed to fetch usage', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchUsage();
+    }, []);
+
+    const columns = [
+        { title: 'Project ID', dataIndex: 'projectId', key: 'projectId' },
+        { title: 'Resource Type', dataIndex: 'resourceType', key: 'resourceType' },
+        { title: 'Quantity', dataIndex: 'quantity', key: 'quantity' },
+        { title: 'Timestamp', dataIndex: 'timestamp', key: 'timestamp' },
+    ];
+
+    return (
+        <Card title="Resource Usage">
+            <Table dataSource={usage} columns={columns} loading={loading} rowKey="id" />
+        </Card>
+    );
 };
 
 export default UsageMonitor;
