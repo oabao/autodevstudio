@@ -37,4 +37,19 @@ public class WorkflowController {
                 SoftwareDevelopmentWorkflow.class, "project-" + projectId);
         return workflow.getRequirementAnalysisResult();
     }
+
+    @GetMapping("/projects/{projectId}/tech-stack")
+    public String getTechStackRecommendationResult(@PathVariable String projectId) {
+        SoftwareDevelopmentWorkflow workflow = workflowClient.newWorkflowStub(
+                SoftwareDevelopmentWorkflow.class, "project-" + projectId);
+        return workflow.getTechStackRecommendationResult();
+    }
+
+    @PostMapping("/projects/{projectId}/tech-stack")
+    public String selectTechStack(@PathVariable String projectId, @RequestBody String selectedStack) {
+        SoftwareDevelopmentWorkflow workflow = workflowClient.newWorkflowStub(
+                SoftwareDevelopmentWorkflow.class, "project-" + projectId);
+        workflow.confirmTechStack(selectedStack);
+        return "Tech stack selection received";
+    }
 }

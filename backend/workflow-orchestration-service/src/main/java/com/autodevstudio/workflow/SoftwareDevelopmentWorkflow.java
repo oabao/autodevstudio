@@ -22,4 +22,10 @@ public interface SoftwareDevelopmentWorkflow {
 
     @QueryMethod
     String getRequirementAnalysisResult();
+
+    @QueryMethod
+    String getTechStackRecommendationResult();
+
+    @SignalMethod
+    void confirmTechStack(String selectedStack);
 }

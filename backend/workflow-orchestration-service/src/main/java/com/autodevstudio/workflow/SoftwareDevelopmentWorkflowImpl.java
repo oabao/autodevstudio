@@ -24,6 +24,7 @@ public class SoftwareDevelopmentWorkflowImpl implements SoftwareDevelopmentWorkf
 
     private String status = "STARTED";
     private String requirementAnalysisResult;
+    private String techStackRecommendationResult;
 
     @Override
     public void execute(String projectId) {
@@ -31,6 +32,10 @@ public class SoftwareDevelopmentWorkflowImpl implements SoftwareDevelopmentWorkf
         status = "ANALYZING_REQUIREMENTS";
         requirementAnalysisResult = agentActivities.analyzeRequirements(projectId);
         status = "REQUIREMENTS_ANALYZED";
+
+        status = "RECOMMENDING_TECH_STACK";
+        techStackRecommendationResult = agentActivities.recommendTechStack(requirementAnalysisResult);
+        status = "TECH_STACK_RECOMMENDED";
     }
 
     @Override
@@ -53,5 +58,16 @@ public class SoftwareDevelopmentWorkflowImpl implements SoftwareDevelopmentWorkf
     @Override
     public String getRequirementAnalysisResult() {
         return requirementAnalysisResult;
+    }
+
+    @Override
+    public String getTechStackRecommendationResult() {
+        return techStackRecommendationResult;
+    }
+
+    @Override
+    public void confirmTechStack(String selectedStack) {
+        // Handle tech stack confirmation
+        status = "TECH_STACK_CONFIRMED";
     }
 }

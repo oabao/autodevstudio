@@ -17,4 +17,10 @@ public class AgentActivitiesImpl implements AgentActivities {
         String url = "http://localhost:8083/api/agents/requirement/analyze"; // Assuming agent service is on 8083
         return restTemplate.postForObject(url, Collections.singletonMap("projectId", projectId), String.class);
     }
+
+    @Override
+    public String recommendTechStack(String requirements) {
+        String url = "http://localhost:8083/api/agents/techstack/recommend";
+        return restTemplate.postForObject(url, Collections.singletonMap("requirements", requirements), String.class);
+    }
 }

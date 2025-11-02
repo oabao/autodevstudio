@@ -28,13 +28,13 @@ const AppSidebar: React.FC = () => {
           <Link to="/">Project Init</Link>
         </Menu.Item>
         <Menu.Item key="2" icon={<ProfileOutlined />}>
-          <Link to="/requirements">Requirements</Link>
+          <Link to="/projects/1/requirements">Requirements</Link>
         </Menu.Item>
         <Menu.Item key="3" icon={<BuildOutlined />}>
-          <Link to="/tech-stack">Tech Stack</Link>
+          <Link to="/projects/1/tech-stack">Tech Stack</Link>
         </Menu.Item>
         <Menu.Item key="4" icon={<ExperimentOutlined />}>
-          <Link to="/architecture">Architecture</Link>
+          <Link to="/projects/1/architecture">Architecture</Link>
         </Menu.Item>
         <Menu.Item key="5" icon={<CodeOutlined />}>
           <Link to="/development">Development</Link>

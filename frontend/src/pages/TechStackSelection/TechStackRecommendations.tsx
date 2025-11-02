@@ -1,42 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Radio, Space, Button, Typography } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { selectTechStack } from '../../services/api/techStackService';
 
 const { Text } = Typography;
 
-const recommendations = [
-  {
-    id: '1',
-    name: 'MERN Stack',
-    description: 'MongoDB, Express.js, React, Node.js. A popular choice for full-stack JavaScript applications.',
-    pros: ['Fast development', 'Single language (JavaScript)', 'Large community'],
-    cons: ['MongoDB can be challenging for relational data', 'Less structured than other options'],
-  },
-  {
-    id: '2',
-    name: 'Spring Boot + React',
-    description: 'A robust and scalable backend with a flexible frontend. Ideal for enterprise-level applications.',
-    pros: ['Highly scalable', 'Strongly typed (Java)', 'Mature ecosystem'],
-    cons: ['Steeper learning curve', 'Can be verbose'],
-  },
-  {
-    id: '3',
-    name: 'Python (Django/FastAPI) + React',
-    description: 'Great for data-intensive applications and rapid development.',
-    pros: ['Excellent for AI/ML integration', 'Simple and clean syntax', 'Fast to develop'],
-    cons: ['Performance can be a concern for high-traffic APIs', 'Less standardized than Java'],
-  },
-];
+interface Recommendation {
+  id: string;
+  name: string;
+  description: string;
+  pros: string[];
+  cons: string[];
+}
 
-const TechStackRecommendations: React.FC = () => {
-  const [selectedValue, setSelectedValue] = useState('1');
+interface TechStackRecommendationsProps {
+  recommendations: Recommendation[];
+  projectId?: string;
+}
+
+const TechStackRecommendations: React.FC<TechStackRecommendationsProps> = ({ recommendations, projectId }) => {
+  const [selectedValue, setSelectedValue] = useState(recommendations.length > 0 ? recommendations[0].id : '');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (recommendations.length > 0) {
+      setSelectedValue(recommendations[0].id);
+    }
+  }, [recommendations]);
 
   const handleChange = (e: any) => {
     setSelectedValue(e.target.value);
   };
 
-  const handleConfirm = () => {
-    const selectedStack = recommendations.find(rec => rec.id === selectedValue);
-    console.log('Confirmed stack:', selectedStack);
+  const handleConfirm = async () => {
+    if (projectId) {
+      const selectedStack = recommendations.find(rec => rec.id === selectedValue);
+      try {
+        await selectTechStack(projectId, selectedStack);
+        navigate(`/projects/${projectId}/architecture`);
+      } catch (error) {
+        console.error('Failed to select tech stack:', error);
+      }
+    }
   };
 
   return (
