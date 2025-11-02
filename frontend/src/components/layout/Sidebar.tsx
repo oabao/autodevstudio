@@ -12,11 +12,23 @@ import {
   CloudUploadOutlined,
   ProfileOutlined,
 } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import useProjectStore from '../../stores/projectStore';
 
 const { Sider } = Layout;
 
 const AppSidebar: React.FC = () => {
+  const { projectId } = useParams<{ projectId: string }>();
+  const setProjectId = useProjectStore((state) => state.setProjectId);
+
+  React.useEffect(() => {
+    if (projectId) {
+      setProjectId(projectId);
+    }
+  }, [projectId, setProjectId]);
+
+  const currentProjectId = useProjectStore((state) => state.projectId);
+
   return (
     <Sider width={200} className="site-layout-background">
       <Menu
@@ -27,18 +39,22 @@ const AppSidebar: React.FC = () => {
         <Menu.Item key="1" icon={<ProjectOutlined />}>
           <Link to="/">Project Init</Link>
         </Menu.Item>
-        <Menu.Item key="2" icon={<ProfileOutlined />}>
-          <Link to="/projects/1/requirements">Requirements</Link>
-        </Menu.Item>
-        <Menu.Item key="3" icon={<BuildOutlined />}>
-          <Link to="/projects/1/tech-stack">Tech Stack</Link>
-        </Menu.Item>
-        <Menu.Item key="4" icon={<ExperimentOutlined />}>
-          <Link to="/projects/1/architecture">Architecture</Link>
-        </Menu.Item>
-        <Menu.Item key="5" icon={<CodeOutlined />}>
-          <Link to="/development">Development</Link>
-        </Menu.Item>
+        {currentProjectId && (
+          <>
+            <Menu.Item key="2" icon={<ProfileOutlined />}>
+              <Link to={`/projects/${currentProjectId}/requirements`}>Requirements</Link>
+            </Menu.Item>
+            <Menu.Item key="3" icon={<BuildOutlined />}>
+              <Link to={`/projects/${currentProjectId}/tech-stack`}>Tech Stack</Link>
+            </Menu.Item>
+            <Menu.Item key="4" icon={<ExperimentOutlined />}>
+              <Link to={`/projects/${currentProjectId}/architecture`}>Architecture</Link>
+            </Menu.Item>
+            <Menu.Item key="5" icon={<CodeOutlined />}>
+                <Link to={`/projects/${currentProjectId}/development`}>Development</Link>
+            </Menu.Item>
+          </>
+        )}
         <Menu.Item key="6" icon={<DollarOutlined />}>
           <Link to="/billing">Billing</Link>
         </Menu.Item>

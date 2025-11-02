@@ -1,5 +1,5 @@
 import useUserStore from "../stores/userStore";
-import config from "../config";
+import config from "../../config";
 
 const API_URL = `${config.workflowServiceUrl}/api/workflow`;
 

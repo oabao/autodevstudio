@@ -26,12 +26,12 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody RegistrationRequest registrationRequest) {
-        User user = new User();
-        user.setName(registrationRequest.getName());
-        user.setEmail(registrationRequest.getEmail());
-        user.setPassword(registrationRequest.getPassword());
-        userService.registerNewUser(user);
-        return ResponseEntity.ok("User registered successfully");
+        try {
+            User registeredUser = userService.registerNewUser(registrationRequest);
+            return ResponseEntity.ok("User registered successfully with ID: " + registeredUser.getId());
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping("/login")

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../../services/api/authService';
 
@@ -8,10 +8,16 @@ const RegisterPage: React.FC = () => {
 
   const onFinish = async (values: any) => {
     try {
-      await register(values.name, values.email, values.password);
-      navigate('/login');
+      const response = await register(values.name, values.email, values.password);
+      if (response && !response.error) {
+        message.success('Registration successful! Please log in.');
+        navigate('/login');
+      } else {
+        message.error(response.message || 'Registration failed. Please try again.');
+      }
     } catch (error) {
       console.error('Registration error:', error);
+      message.error('An unexpected error occurred. Please try again.');
     }
   };
 
@@ -27,7 +33,7 @@ const RegisterPage: React.FC = () => {
         </Form.Item>
         <Form.Item
           name="email"
-          rules={[{ required: true, message: 'Please input your Email!' }]}
+          rules={[{ required: true, type: 'email', message: 'Please input a valid Email!' }]}
         >
           <Input placeholder="Email" />
         </Form.Item>
@@ -36,27 +42,6 @@ const RegisterPage: React.FC = () => {
           rules={[{ required: true, message: 'Please input your Password!' }]}
         >
           <Input.Password placeholder="Password" />
-        </Form.Item>
-        <Form.Item
-          name="confirm"
-          dependencies={['password']}
-          hasFeedback
-          rules={[
-            {
-              required: true,
-              message: 'Please confirm your password!',
-            },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue('password') === value) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(new Error('The two passwords that you entered do not match!'));
-              },
-            }),
-          ]}
-        >
-          <Input.Password placeholder="Confirm Password" />
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
