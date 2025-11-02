@@ -1,16 +1,18 @@
 import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import useUserStore from '../../stores/userStore';
+import { register } from '../../services/api/authService';
 
 const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
-  const login = useUserStore((state) => state.login);
 
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
-    login({ name: values.username });
-    navigate('/');
+  const onFinish = async (values: any) => {
+    try {
+      await register(values.name, values.email, values.password);
+      navigate('/login');
+    } catch (error) {
+      console.error('Registration error:', error);
+    }
   };
 
   return (
@@ -18,10 +20,16 @@ const RegisterPage: React.FC = () => {
       <h2>Register</h2>
       <Form name="register" onFinish={onFinish}>
         <Form.Item
-          name="username"
-          rules={[{ required: true, message: 'Please input your Username!' }]}
+          name="name"
+          rules={[{ required: true, message: 'Please input your Name!' }]}
         >
-          <Input placeholder="Username" />
+          <Input placeholder="Name" />
+        </Form.Item>
+        <Form.Item
+          name="email"
+          rules={[{ required: true, message: 'Please input your Email!' }]}
+        >
+          <Input placeholder="Email" />
         </Form.Item>
         <Form.Item
           name="password"
