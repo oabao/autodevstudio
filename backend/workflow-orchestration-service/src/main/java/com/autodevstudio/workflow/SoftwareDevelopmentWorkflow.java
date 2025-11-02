@@ -26,6 +26,12 @@ public interface SoftwareDevelopmentWorkflow {
     @QueryMethod
     String getTechStackRecommendationResult();
 
+    @QueryMethod
+    String getArchitectureDesign();
+
+    @QueryMethod
+    String getPrototype();
+
     @SignalMethod
     void confirmTechStack(String selectedStack);
 }

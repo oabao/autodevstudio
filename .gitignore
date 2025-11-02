@@ -17,8 +17,8 @@ buildNumber.properties
 .classpath
 
 # Node.js
-frontend/node_modules
-frontend/dist
+frontend/node_modules/
+frontend/dist/
 frontend/.DS_Store
 frontend/.env
 frontend/npm-debug.log*
@@ -26,3 +26,14 @@ frontend/yarn-debug.log*
 frontend/yarn-error.log*
 npm_output.log
 agent_service_output.log
+*.log
+
+# Python
+__pycache__/
+*.pyc
+
+# Vite
+.vite/
+
+# Maven
+target/

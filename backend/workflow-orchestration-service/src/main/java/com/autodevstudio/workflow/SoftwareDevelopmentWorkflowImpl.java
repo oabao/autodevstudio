@@ -25,6 +25,8 @@ public class SoftwareDevelopmentWorkflowImpl implements SoftwareDevelopmentWorkf
     private String status = "STARTED";
     private String requirementAnalysisResult;
     private String techStackRecommendationResult;
+    private String architectureDesignResult;
+    private String prototypeGenerationResult;
 
     @Override
     public void execute(String projectId) {
@@ -36,6 +38,17 @@ public class SoftwareDevelopmentWorkflowImpl implements SoftwareDevelopmentWorkf
         status = "RECOMMENDING_TECH_STACK";
         techStackRecommendationResult = agentActivities.recommendTechStack(requirementAnalysisResult);
         status = "TECH_STACK_RECOMMENDED";
+
+        // Wait for tech stack confirmation
+        Workflow.await(() -> "TECH_STACK_CONFIRMED".equals(status));
+
+        status = "DESIGNING_ARCHITECTURE";
+        architectureDesignResult = agentActivities.designArchitecture(requirementAnalysisResult);
+        status = "ARCHITECTURE_DESIGNED";
+
+        status = "GENERATING_PROTOTYPE";
+        prototypeGenerationResult = agentActivities.generatePrototype(architectureDesignResult);
+        status = "PROTOTYPE_GENERATED";
     }
 
     @Override
@@ -63,6 +76,16 @@ public class SoftwareDevelopmentWorkflowImpl implements SoftwareDevelopmentWorkf
     @Override
     public String getTechStackRecommendationResult() {
         return techStackRecommendationResult;
+    }
+
+    @Override
+    public String getArchitectureDesign() {
+        return architectureDesignResult;
+    }
+
+    @Override
+    public String getPrototype() {
+        return prototypeGenerationResult;
     }
 
     @Override

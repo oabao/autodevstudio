@@ -24,3 +24,36 @@ export const createProject = async (projectId: string) => {
 
   return response.text();
 };
+
+export const getProjectStatus = async (projectId: string) => {
+    const { jwt } = useUserStore.getState();
+    if (!jwt) throw new Error("User is not authenticated");
+
+    const response = await fetch(`${API_URL}/${projectId}/status`, {
+        headers: { 'Authorization': `Bearer ${jwt}` },
+    });
+    if (!response.ok) throw new Error('Failed to fetch project status');
+    return response.json();
+};
+
+export const getArchitectureDesign = async (projectId: string) => {
+    const { jwt } = useUserStore.getState();
+    if (!jwt) throw new Error("User is not authenticated");
+
+    const response = await fetch(`${API_URL}/${projectId}/architecture`, {
+        headers: { 'Authorization': `Bearer ${jwt}` },
+    });
+    if (!response.ok) throw new Error('Failed to fetch architecture design');
+    return response.json();
+};
+
+export const getPrototype = async (projectId: string) => {
+    const { jwt } = useUserStore.getState();
+    if (!jwt) throw new Error("User is not authenticated");
+
+    const response = await fetch(`${API_URL}/${projectId}/prototype`, {
+        headers: { 'Authorization': `Bearer ${jwt}` },
+    });
+    if (!response.ok) throw new Error('Failed to fetch prototype');
+    return response.json();
+};
