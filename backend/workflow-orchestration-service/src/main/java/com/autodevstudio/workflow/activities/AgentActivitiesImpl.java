@@ -45,4 +45,28 @@ public class AgentActivitiesImpl implements AgentActivities {
         String url = agentServiceUrl + "/api/agents/feedback/process";
         return restTemplate.postForObject(url, Collections.singletonMap("feedback", feedback), String.class);
     }
+
+    @Override
+    public String generateTests(String design) {
+        String url = agentServiceUrl + "/api/agents/test/generate";
+        return restTemplate.postForObject(url, Collections.singletonMap("design", design), String.class);
+    }
+
+    @Override
+    public String developCode(String tests) {
+        String url = agentServiceUrl + "/api/agents/coder/develop";
+        return restTemplate.postForObject(url, Collections.singletonMap("tests", tests), String.class);
+    }
+
+    @Override
+    public String debugCode(String code) {
+        String url = agentServiceUrl + "/api/agents/debugger/debug";
+        return restTemplate.postForObject(url, Collections.singletonMap("code", code), String.class);
+    }
+
+    @Override
+    public String refactorCode(String code) {
+        String url = agentServiceUrl + "/api/agents/refactor/run";
+        return restTemplate.postForObject(url, Collections.singletonMap("code", code), String.class);
+    }
 }

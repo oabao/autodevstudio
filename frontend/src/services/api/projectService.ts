@@ -57,3 +57,36 @@ export const getPrototype = async (projectId: string) => {
     if (!response.ok) throw new Error('Failed to fetch prototype');
     return response.json();
 };
+
+export const getTestCases = async (projectId: string) => {
+    const { jwt } = useUserStore.getState();
+    if (!jwt) throw new Error("User is not authenticated");
+
+    const response = await fetch(`${API_URL}/${projectId}/test-cases`, {
+        headers: { 'Authorization': `Bearer ${jwt}` },
+    });
+    if (!response.ok) throw new Error('Failed to fetch test cases');
+    return response.json();
+};
+
+export const getDevelopedCode = async (projectId: string) => {
+    const { jwt } = useUserStore.getState();
+    if (!jwt) throw new Error("User is not authenticated");
+
+    const response = await fetch(`${API_URL}/${projectId}/developed-code`, {
+        headers: { 'Authorization': `Bearer ${jwt}` },
+    });
+    if (!response.ok) throw new Error('Failed to fetch developed code');
+    return response.json();
+};
+
+export const getRefactoredCode = async (projectId: string) => {
+    const { jwt } = useUserStore.getState();
+    if (!jwt) throw new Error("User is not authenticated");
+
+    const response = await fetch(`${API_URL}/${projectId}/refactored-code`, {
+        headers: { 'Authorization': `Bearer ${jwt}` },
+    });
+    if (!response.ok) throw new Error('Failed to fetch refactored code');
+    return response.json();
+};

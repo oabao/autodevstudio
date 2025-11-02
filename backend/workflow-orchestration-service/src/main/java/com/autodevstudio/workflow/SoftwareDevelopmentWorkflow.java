@@ -32,6 +32,15 @@ public interface SoftwareDevelopmentWorkflow {
     @QueryMethod
     String getPrototype();
 
+    @QueryMethod
+    String getTestCases();
+
+    @QueryMethod
+    String getDevelopedCode();
+
+    @QueryMethod
+    String getRefactoredCode();
+
     @SignalMethod
     void confirmTechStack(String selectedStack);
 }

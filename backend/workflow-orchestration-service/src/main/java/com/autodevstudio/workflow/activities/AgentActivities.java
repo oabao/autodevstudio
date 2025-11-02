@@ -9,4 +9,8 @@ public interface AgentActivities {
     String designArchitecture(String requirements);
     String generatePrototype(String architecture);
     String processFeedback(String feedback);
+    String generateTests(String design);
+    String developCode(String tests);
+    String debugCode(String code);
+    String refactorCode(String code);
 }

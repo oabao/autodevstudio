@@ -1,52 +1,42 @@
-import React from 'react';
-import { Card, Row, Col, Statistic, Progress } from 'antd';
-import { BugOutlined, CodeOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { Spin, Alert, Row, Col } from 'antd';
+import useDevelopmentStore from '../../stores/developmentStore';
+import TestCaseViewer from './TestCaseViewer';
 
 const DevelopmentDashboard: React.FC = () => {
-  return (
-    <div>
-      <Row gutter={16}>
-        <Col span={8}>
-          <Card>
-            <Statistic
-              title="Code Coverage"
-              value={85}
-              precision={2}
-              valueStyle={{ color: '#3f8600' }}
-              prefix={<CheckCircleOutlined />}
-              suffix="%"
-            />
-          </Card>
-        </Col>
-        <Col span={8}>
-          <Card>
-            <Statistic
-              title="Bugs Found"
-              value={5}
-              valueStyle={{ color: '#cf1322' }}
-              prefix={<BugOutlined />}
-            />
-          </Card>
-        </Col>
-        <Col span={8}>
-          <Card>
-            <Statistic
-              title="Completed Tasks"
-              value={42}
-              prefix={<CodeOutlined />}
-            />
-          </Card>
-        </Col>
-      </Row>
-      <Row style={{ marginTop: 24 }}>
-        <Col span={24}>
-          <Card title="Development Progress">
-            <Progress percent={60} status="active" />
-          </Card>
-        </Col>
-      </Row>
-    </div>
-  );
+    const { projectId } = useParams<{ projectId: string }>();
+    const { progress, testCases, developedCode, isLoading, error, actions } = useDevelopmentStore();
+
+    useEffect(() => {
+        if (projectId) {
+            actions.fetchDevelopmentStatus(projectId);
+        }
+    }, [projectId, actions]);
+
+    if (isLoading) {
+        return <Spin size="large" />;
+    }
+
+    if (error) {
+        return <Alert message={error} type="error" />;
+    }
+
+    return (
+        <div>
+            <h1>Development Dashboard</h1>
+            <p>Project ID: {projectId}</p>
+            <Row gutter={16}>
+                <Col span={12}>
+                    <TestCaseViewer testCases={testCases} />
+                </Col>
+                <Col span={12}>
+                    <h2>Developed Code</h2>
+                    <pre>{developedCode}</pre>
+                </Col>
+            </Row>
+        </div>
+    );
 };
 
 export default DevelopmentDashboard;

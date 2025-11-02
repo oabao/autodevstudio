@@ -27,6 +27,9 @@ public class SoftwareDevelopmentWorkflowImpl implements SoftwareDevelopmentWorkf
     private String techStackRecommendationResult;
     private String architectureDesignResult;
     private String prototypeGenerationResult;
+    private String testCasesResult;
+    private String developedCodeResult;
+    private String refactoredCodeResult;
 
     @Override
     public void execute(String projectId) {
@@ -49,6 +52,21 @@ public class SoftwareDevelopmentWorkflowImpl implements SoftwareDevelopmentWorkf
         status = "GENERATING_PROTOTYPE";
         prototypeGenerationResult = agentActivities.generatePrototype(architectureDesignResult);
         status = "PROTOTYPE_GENERATED";
+
+        // Basic TDD Loop
+        status = "GENERATING_TESTS";
+        testCasesResult = agentActivities.generateTests(architectureDesignResult);
+        status = "TESTS_GENERATED";
+
+        status = "DEVELOPING_CODE";
+        developedCodeResult = agentActivities.developCode(testCasesResult);
+        status = "CODE_DEVELOPED";
+
+        status = "REFACTORING_CODE";
+        refactoredCodeResult = agentActivities.refactorCode(developedCodeResult);
+        status = "CODE_REFACTORED";
+
+        status = "DEVELOPMENT_COMPLETE";
     }
 
     @Override
@@ -86,6 +104,21 @@ public class SoftwareDevelopmentWorkflowImpl implements SoftwareDevelopmentWorkf
     @Override
     public String getPrototype() {
         return prototypeGenerationResult;
+    }
+
+    @Override
+    public String getTestCases() {
+        return testCasesResult;
+    }
+
+    @Override
+    public String getDevelopedCode() {
+        return developedCodeResult;
+    }
+
+    @Override
+    public String getRefactoredCode() {
+        return refactoredCodeResult;
     }
 
     @Override
