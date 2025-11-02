@@ -13,6 +13,9 @@ import ArchitectureDesignPage from './pages/ArchitectureDesign/ArchitectureDesig
 import DevelopmentDashboard from './pages/Development/DevelopmentDashboard';
 import DeliveryPage from './pages/Delivery/DeliveryPage';
 import BillingPage from './pages/Billing/BillingPage';
+import DeploymentPage from './pages/Maintenance/DeploymentPage';
+import AIMonitoringPage from './pages/Maintenance/AIMonitoringPage';
+import NewFeatureRequestForm from './pages/Maintenance/NewFeatureRequestForm';
 import './App.css';
 
 const { Content } = Layout;
@@ -44,6 +47,9 @@ const App: React.FC = () => {
                   <Route path="/projects/:projectId/development" element={<DevelopmentDashboard />} />
                   <Route path="/projects/:projectId/delivery" element={<DeliveryPage />} />
                   <Route path="/billing" element={<BillingPage />} />
+                  <Route path="/maintenance/deployment" element={<DeploymentPage />} />
+                  <Route path="/maintenance/monitoring" element={<AIMonitoringPage />} />
+                  <Route path="/maintenance/new-feature" element={<NewFeatureRequestForm />} />
                   <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
               </Content>

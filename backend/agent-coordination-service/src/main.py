@@ -97,6 +97,12 @@ async def generate_docs(request: ProjectRequest):
     result = await agent.execute(task)
     return result.data
 
+@app.post("/api/agents/monitoring/handle-alert")
+async def handle_monitoring_alert(request: ProjectRequest):
+    agent = DebuggerAgent()
+    result = await agent.handle_alert(request.data)
+    return result
+
 @app.get("/")
 def read_root():
     return {"message": "Agent Coordination Service is running"}

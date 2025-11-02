@@ -60,3 +60,12 @@ resource "aws_db_instance" "main" {
   password             = var.db_password
   skip_final_snapshot  = true
 }
+
+resource "aws_s3_bucket" "deployment_bucket" {
+  bucket = "autodevstudio-deployment-bucket"
+
+  tags = {
+    Name        = "AutoDevStudio Deployment Bucket"
+    Environment = "Dev"
+  }
+}

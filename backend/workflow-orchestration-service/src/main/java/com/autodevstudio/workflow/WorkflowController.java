@@ -52,4 +52,32 @@ public class WorkflowController {
         workflow.confirmTechStack(selectedStack);
         return "Tech stack selection received";
     }
+
+    @PostMapping("/projects/{projectId}/deploy")
+    public String deployProject(@PathVariable String projectId, @RequestBody DeploymentRequest request) {
+        MaintenanceWorkflow workflow = workflowClient.newWorkflowStub(
+                MaintenanceWorkflow.class,
+                WorkflowOptions.newBuilder()
+                        .setTaskQueue("MAINTENANCE_TASK_QUEUE")
+                        .setWorkflowId("maintenance-" + projectId)
+                        .build());
+
+        WorkflowClient.start(workflow::deployProject, projectId, request.getDeploymentTarget(), request.getConfig());
+
+        return "Deployment workflow started for project " + projectId;
+    }
+
+    @PostMapping("/projects/{projectId}/new-feature")
+    public String requestNewFeature(@PathVariable String projectId, @RequestBody NewFeatureRequest request) {
+        MaintenanceWorkflow workflow = workflowClient.newWorkflowStub(
+                MaintenanceWorkflow.class,
+                WorkflowOptions.newBuilder()
+                        .setTaskQueue("MAINTENANCE_TASK_QUEUE")
+                        .setWorkflowId("maintenance-" + projectId)
+                        .build());
+
+        WorkflowClient.start(workflow::requestNewFeature, projectId, request.getNewRequirement(), request.getContext());
+
+        return "New feature request workflow started for project " + projectId;
+    }
 }

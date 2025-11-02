@@ -112,3 +112,55 @@ export const getDocumentationResult = async (projectId: string) => {
     if (!response.ok) throw new Error('Failed to fetch documentation result');
     return response.json();
 };
+
+export const deployProject = async (projectId: string, deploymentTarget: string, config: string) => {
+    const { jwt } = useUserStore.getState();
+    if (!jwt) throw new Error("User is not authenticated");
+
+    const response = await fetch(`${API_URL}/projects/${projectId}/deploy`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${jwt}`,
+        },
+        body: JSON.stringify({ deploymentTarget, config }),
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to deploy project');
+    }
+
+    return response.text();
+};
+
+export const requestNewFeature = async (projectId: string, newRequirement: string, context: string) => {
+    const { jwt } = useUserStore.getState();
+    if (!jwt) throw new Error("User is not authenticated");
+
+    const response = await fetch(`${API_URL}/projects/${projectId}/new-feature`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${jwt}`,
+        },
+        body: JSON.stringify({ newRequirement, context }),
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to request new feature');
+    }
+
+    return response.text();
+};
+
+export const getMonitoringData = async (projectId: string) => {
+    const { jwt } = useUserStore.getState();
+    if (!jwt) throw new Error("User is not authenticated");
+
+    // This is a placeholder for the actual monitoring API endpoint
+    const response = await fetch(`${config.agentServiceUrl}/api/monitoring/${projectId}`, {
+        headers: { 'Authorization': `Bearer ${jwt}` },
+    });
+    if (!response.ok) throw new Error('Failed to fetch monitoring data');
+    return response.json();
+};

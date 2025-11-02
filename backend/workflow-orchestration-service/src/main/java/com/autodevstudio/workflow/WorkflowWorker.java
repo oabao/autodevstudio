@@ -20,9 +20,15 @@ public class WorkflowWorker implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         WorkerFactory factory = WorkerFactory.newInstance(workflowClient);
-        Worker worker = factory.newWorker("SOFTWARE_DEVELOPMENT_TASK_QUEUE");
-        worker.registerWorkflowImplementationTypes(SoftwareDevelopmentWorkflowImpl.class);
-        worker.registerActivitiesImplementations(agentActivities);
+
+        Worker softwareDevelopmentWorker = factory.newWorker("SOFTWARE_DEVELOPMENT_TASK_QUEUE");
+        softwareDevelopmentWorker.registerWorkflowImplementationTypes(SoftwareDevelopmentWorkflowImpl.class);
+        softwareDevelopmentWorker.registerActivitiesImplementations(agentActivities);
+
+        Worker maintenanceWorker = factory.newWorker("MAINTENANCE_TASK_QUEUE");
+        maintenanceWorker.registerWorkflowImplementationTypes(MaintenanceWorkflowImpl.class);
+        maintenanceWorker.registerActivitiesImplementations(agentActivities);
+
         factory.start();
     }
 }
