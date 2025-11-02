@@ -1,0 +1,30 @@
+---
+groups:
+  - name: autodevstudio_alerts
+    rules:
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status="500"}[5m]) > 0.1
+        for: 1m
+        labels:
+          severity: "critical"
+        annotations:
+          summary: "High error rate detected"
+          description: "The error rate for http_requests_total is above 10%."
+
+      - alert: WorkflowStuck
+        expr: autodevstudio_workflow_stuck > 0
+        for: 10m
+        labels:
+          severity: "warning"
+        annotations:
+          summary: "Workflow stuck"
+          description: "A workflow has been stuck for more than 10 minutes."
+
+      - alert: AgentFailureRateHigh
+        expr: rate(autodevstudio_agent_failures_total[5m]) > 0.2
+        for: 5m
+        labels:
+          severity: "warning"
+        annotations:
+          summary: "High agent failure rate"
+          description: "The failure rate for AI agents is above 20%."

@@ -37,3 +37,10 @@ __pycache__/
 
 # Maven
 target/
+
+# Terraform
+.terraform/
+.terraform.lock.hcl
+
+# Test results
+test-results/
