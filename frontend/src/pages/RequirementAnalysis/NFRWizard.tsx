@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Card, Button, Modal, Form, Select, InputNumber } from 'antd';
+import { Card, Button, Modal, Form, Select, InputNumber, List } from 'antd';
 
 const { Option } = Select;
 
-const NFRWizard: React.FC = () => {
+interface NFRWizardProps {
+  nfrs: string[];
+}
+
+const NFRWizard: React.FC<NFRWizardProps> = ({ nfrs }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
 
@@ -27,6 +31,11 @@ const NFRWizard: React.FC = () => {
   return (
     <>
       <Card title="Non-Functional Requirements">
+        <List
+          dataSource={nfrs}
+          renderItem={(item) => <List.Item>{item}</List.Item>}
+          style={{ marginBottom: 16 }}
+        />
         <Button onClick={showModal}>Configure NFRs</Button>
       </Card>
       <Modal

@@ -19,4 +19,7 @@ public interface SoftwareDevelopmentWorkflow {
 
     @QueryMethod
     String getStatus();
+
+    @QueryMethod
+    String getRequirementAnalysisResult();
 }

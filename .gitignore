@@ -25,3 +25,4 @@ frontend/npm-debug.log*
 frontend/yarn-debug.log*
 frontend/yarn-error.log*
 npm_output.log
+agent_service_output.log

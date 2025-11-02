@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Row, Col } from 'antd';
+import { useParams } from 'react-router-dom';
 import FeatureList from './FeatureList';
 import UserStoryMap from './UserStoryMap';
 import NFRWizard from './NFRWizard';
+import { getRequirementAnalysis } from '../../services/api/requirementService';
 
 const { Title, Paragraph } = Typography;
 
 const RequirementAnalysisPage: React.FC = () => {
+  const { projectId } = useParams<{ projectId: string }>();
+  const [requirements, setRequirements] = useState<any>(null);
+
+  useEffect(() => {
+    if (projectId) {
+      getRequirementAnalysis(projectId)
+        .then(data => setRequirements(data))
+        .catch(error => console.error('Failed to fetch requirements:', error));
+    }
+  }, [projectId]);
+
+  if (!requirements) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <Title level={2}>Requirement Analysis</Title>
@@ -15,15 +32,15 @@ const RequirementAnalysisPage: React.FC = () => {
       </Paragraph>
       <Row gutter={16}>
         <Col span={12}>
-          <FeatureList />
+          <FeatureList initialFeatures={requirements.features} />
         </Col>
         <Col span={12}>
-          <UserStoryMap />
+          <UserStoryMap userStories={requirements.user_stories} />
         </Col>
       </Row>
       <Row style={{ marginTop: 16 }}>
         <Col span={24}>
-          <NFRWizard />
+          <NFRWizard nfrs={requirements.nfrs} />
         </Col>
       </Row>
     </div>

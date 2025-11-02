@@ -37,7 +37,7 @@ const App: React.FC = () => {
               >
                 <Routes>
                   <Route path="/" element={<ProjectInitPage />} />
-                  <Route path="/requirements" element={<RequirementAnalysisPage />} />
+                  <Route path="/projects/:projectId/requirements" element={<RequirementAnalysisPage />} />
                   <Route path="/tech-stack" element={<TechStackSelectionPage />} />
                   <Route path="/architecture" element={<ArchitectureDesignPage />} />
                   <Route path="/development" element={<DevelopmentDashboard />} />

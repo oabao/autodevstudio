@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { List, Card, Button } from 'antd';
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 
-const initialFeatures = [
-  { id: '1', name: 'User Authentication', description: 'Users can sign up and log in.' },
-  { id: '2', name: 'Project Dashboard', description: 'Display a list of user projects.' },
-  { id: '3', name: 'Payment Integration', description: 'Allow users to pay for services.' },
-];
+interface Feature {
+  id: string;
+  name: string;
+  description: string;
+}
 
-const FeatureList: React.FC = () => {
+interface FeatureListProps {
+  initialFeatures: Feature[];
+}
+
+const FeatureList: React.FC<FeatureListProps> = ({ initialFeatures }) => {
   const [features, setFeatures] = useState(initialFeatures);
+
+  useEffect(() => {
+    setFeatures(initialFeatures);
+  }, [initialFeatures]);
 
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;

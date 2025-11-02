@@ -17,7 +17,7 @@ const ProjectInitForm: React.FC = () => {
     const projectId = uuidv4();
     try {
       await createProject(projectId);
-      navigate('/requirements');
+      navigate(`/projects/${projectId}/requirements`);
     } catch (error) {
       console.error('Failed to create project:', error);
       // Handle error, e.g., show a notification
