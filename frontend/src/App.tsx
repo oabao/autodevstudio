@@ -11,6 +11,7 @@ import RequirementAnalysisPage from './pages/RequirementAnalysis/RequirementAnal
 import TechStackSelectionPage from './pages/TechStackSelection/TechStackSelectionPage';
 import ArchitectureDesignPage from './pages/ArchitectureDesign/ArchitectureDesignPage';
 import DevelopmentDashboard from './pages/Development/DevelopmentDashboard';
+import DeliveryPage from './pages/Delivery/DeliveryPage';
 import BillingPage from './pages/Billing/BillingPage';
 import './App.css';
 
@@ -41,6 +42,7 @@ const App: React.FC = () => {
                   <Route path="/projects/:projectId/tech-stack" element={<TechStackSelectionPage />} />
                   <Route path="/projects/:projectId/architecture" element={<ArchitectureDesignPage />} />
                   <Route path="/projects/:projectId/development" element={<DevelopmentDashboard />} />
+                  <Route path="/projects/:projectId/delivery" element={<DeliveryPage />} />
                   <Route path="/billing" element={<BillingPage />} />
                   <Route path="*" element={<Navigate to="/" />} />
                 </Routes>

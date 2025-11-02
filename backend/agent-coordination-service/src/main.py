@@ -9,6 +9,8 @@ from src.agents.test_agent import TestAgent
 from src.agents.coder_agent import CoderAgent
 from src.agents.debugger_agent import DebuggerAgent
 from src.agents.refactor_agent import RefactorAgent
+from src.agents.security_agent import SecurityAgent
+from src.agents.docwriter_agent import DocWriterAgent
 from src.agents.base_agent import AgentTask
 import uvicorn
 
@@ -78,6 +80,20 @@ async def debug_code(request: ProjectRequest):
 async def refactor_code(request: ProjectRequest):
     agent = RefactorAgent()
     task = AgentTask(task_id="9", task_type="refactor_code", data=request.data)
+    result = await agent.execute(task)
+    return result.data
+
+@app.post("/api/agents/security/scan")
+async def scan_code(request: ProjectRequest):
+    agent = SecurityAgent()
+    task = AgentTask(task_id="10", task_type="scan_code", data=request.data)
+    result = await agent.execute(task)
+    return result.data
+
+@app.post("/api/agents/docs/generate")
+async def generate_docs(request: ProjectRequest):
+    agent = DocWriterAgent()
+    task = AgentTask(task_id="11", task_type="generate_docs", data=request.data)
     result = await agent.execute(task)
     return result.data
 

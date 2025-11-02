@@ -90,3 +90,25 @@ export const getRefactoredCode = async (projectId: string) => {
     if (!response.ok) throw new Error('Failed to fetch refactored code');
     return response.json();
 };
+
+export const getSecurityScanResult = async (projectId: string) => {
+    const { jwt } = useUserStore.getState();
+    if (!jwt) throw new Error("User is not authenticated");
+
+    const response = await fetch(`${API_URL}/${projectId}/security-scan`, {
+        headers: { 'Authorization': `Bearer ${jwt}` },
+    });
+    if (!response.ok) throw new Error('Failed to fetch security scan result');
+    return response.json();
+};
+
+export const getDocumentationResult = async (projectId: string) => {
+    const { jwt } = useUserStore.getState();
+    if (!jwt) throw new Error("User is not authenticated");
+
+    const response = await fetch(`${API_URL}/${projectId}/documentation`, {
+        headers: { 'Authorization': `Bearer ${jwt}` },
+    });
+    if (!response.ok) throw new Error('Failed to fetch documentation result');
+    return response.json();
+};

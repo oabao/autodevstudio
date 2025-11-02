@@ -30,6 +30,8 @@ public class SoftwareDevelopmentWorkflowImpl implements SoftwareDevelopmentWorkf
     private String testCasesResult;
     private String developedCodeResult;
     private String refactoredCodeResult;
+    private String securityScanResult;
+    private String documentationResult;
 
     @Override
     public void execute(String projectId) {
@@ -66,7 +68,15 @@ public class SoftwareDevelopmentWorkflowImpl implements SoftwareDevelopmentWorkf
         refactoredCodeResult = agentActivities.refactorCode(developedCodeResult);
         status = "CODE_REFACTORED";
 
-        status = "DEVELOPMENT_COMPLETE";
+        status = "SECURITY_SCAN";
+        securityScanResult = agentActivities.scanCode(refactoredCodeResult);
+        status = "SCAN_COMPLETE";
+
+        status = "GENERATING_DOCS";
+        documentationResult = agentActivities.generateDocs(refactoredCodeResult);
+        status = "DOCS_GENERATED";
+
+        status = "DELIVERY_COMPLETE";
     }
 
     @Override
@@ -119,6 +129,16 @@ public class SoftwareDevelopmentWorkflowImpl implements SoftwareDevelopmentWorkf
     @Override
     public String getRefactoredCode() {
         return refactoredCodeResult;
+    }
+
+    @Override
+    public String getSecurityScanResult() {
+        return securityScanResult;
+    }
+
+    @Override
+    public String getDocumentationResult() {
+        return documentationResult;
     }
 
     @Override

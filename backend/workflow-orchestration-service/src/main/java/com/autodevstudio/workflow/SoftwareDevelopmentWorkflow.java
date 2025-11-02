@@ -41,6 +41,12 @@ public interface SoftwareDevelopmentWorkflow {
     @QueryMethod
     String getRefactoredCode();
 
+    @QueryMethod
+    String getSecurityScanResult();
+
+    @QueryMethod
+    String getDocumentationResult();
+
     @SignalMethod
     void confirmTechStack(String selectedStack);
 }

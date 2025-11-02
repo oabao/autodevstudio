@@ -13,4 +13,6 @@ public interface AgentActivities {
     String developCode(String tests);
     String debugCode(String code);
     String refactorCode(String code);
+    String scanCode(String code);
+    String generateDocs(String code);
 }
