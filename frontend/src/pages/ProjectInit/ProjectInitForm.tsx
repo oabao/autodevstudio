@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Input, Button, Tabs, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
+import { createProject } from '../../services/api/projectService';
 
 const { TextArea } = Input;
 const { TabPane } = Tabs;
 
 const ProjectInitForm: React.FC = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
-  const onFinish = (values: any) => {
+  const onFinish = async (values: any) => {
     console.log('Received values of form: ', values);
-    // Here you would typically trigger the project creation workflow
+    const projectId = uuidv4();
+    try {
+      await createProject(projectId);
+      navigate('/requirements');
+    } catch (error) {
+      console.error('Failed to create project:', error);
+      // Handle error, e.g., show a notification
+    }
   };
 
   return (
@@ -57,8 +68,7 @@ const ProjectInitForm: React.FC = () => {
               </p>
               <p className="ant-upload-text">Click or drag files to this area to upload</p>
               <p className="ant-upload-hint">
-                Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                band files
+                Support for a single or bulk upload.
               </p>
             </Upload.Dragger>
           </TabPane>

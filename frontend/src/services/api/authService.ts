@@ -1,4 +1,6 @@
-const API_URL = 'http://localhost:8080/api/user';
+import config from '../config';
+
+const API_URL = `${config.userBillingServiceUrl}/api/user`;
 
 export const register = async (name: string, email: string, password: string) => {
   const response = await fetch(`${API_URL}/register`, {
