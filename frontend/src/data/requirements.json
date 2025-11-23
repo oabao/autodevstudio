@@ -1,0 +1,49 @@
+{
+  "projectId": "proj-001",
+  "features": [
+    {
+      "id": "feat-01",
+      "name": "User Authentication",
+      "description": "Users can sign up, log in, and log out.",
+      "priority": "high"
+    },
+    {
+      "id": "feat-02",
+      "name": "Product Catalog",
+      "description": "Browse and search for products.",
+      "priority": "high"
+    },
+    {
+      "id": "feat-03",
+      "name": "Shopping Cart",
+      "description": "Users can add and remove items from their cart.",
+      "priority": "medium"
+    },
+    {
+      "id": "feat-04",
+      "name": "Checkout Process",
+      "description": "Securely pay for items in the cart.",
+      "priority": "medium"
+    }
+  ],
+  "userStoryMap": {
+    "themes": [
+      {
+        "name": "User Management",
+        "epics": [
+          {
+            "name": "Authentication",
+            "stories": [
+              { "id": "story-01", "name": "As a user, I want to sign up with my email." },
+              { "id": "story-02", "name": "As a user, I want to log in." }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "nfrs": [
+    { "id": "nfr-01", "category": "Performance", "requirement": "Pages should load in under 2 seconds." },
+    { "id": "nfr-02", "category": "Security", "requirement": "All user data must be encrypted." }
+  ]
+}
